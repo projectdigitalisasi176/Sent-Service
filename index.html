@@ -68,7 +68,7 @@
                     Masuk ke Sistem
                 </button>
 
-                <!-- Keterangan Kendala Login (Menggantikan Demo Akun) -->
+                <!-- Keterangan Kendala Login -->
                 <div class="text-center pt-3 border-t border-slate-100 mt-4">
                     <p class="text-xs text-slate-500 leading-relaxed">
                         Jika ada kendala Login Silahkan Hubungi <strong class="text-slate-700">Tim General Affairs</strong>.
@@ -80,41 +80,41 @@
 
 
     <!-- ==================== APLIKASI UTAMA ==================== -->
-    <div id="mainApp" class="hidden flex h-screen w-screen overflow-hidden">
+    <div id="mainApp" class="hidden flex flex-col md:flex-row h-screen w-screen overflow-hidden">
         
-        <!-- Sidebar -->
-        <aside class="w-64 bg-blue-950 text-slate-300 flex flex-col border-r border-blue-900 shadow-xl z-20">
+        <!-- Sidebar untuk Desktop & Tablet/HP (Bisa di-toggle atau responsif) -->
+        <aside class="w-full md:w-64 bg-blue-950 text-slate-300 flex flex-row md:flex-col border-b md:border-b-0 md:border-r border-blue-900 shadow-xl z-20 justify-between md:justify-start shrink-0">
             <!-- Brand -->
-            <div class="p-5 border-b border-blue-900/50 flex items-center gap-3">
-                <div class="w-10 h-10 flex items-center justify-center overflow-hidden rounded">
+            <div class="p-3 md:p-5 border-b-0 md:border-b border-blue-900/50 flex items-center gap-3">
+                <div class="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center overflow-hidden rounded">
                     <img src="sentosa.png" alt="Logo" class="w-full h-full object-contain">
                 </div>
-                <div>
+                <div class="hidden md:block">
                     <h2 class="font-bold text-white tracking-wide text-sm">SENT SERVICE</h2>
                     <p class="text-[10px] text-blue-300 uppercase tracking-widest font-medium">Bank Sentosa</p>
                 </div>
             </div>
 
-            <!-- Navigation Links -->
-            <nav class="flex-1 p-4 space-y-1.5 overflow-y-auto">
-                <a href="#" onclick="switchTab('dashboard')" id="nav-dashboard" class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium bg-blue-900/80 text-white transition-all shadow-sm">
-                    <i class="fa-solid fa-chart-pie w-5 text-center text-blue-400"></i> Dashboard
+            <!-- Navigation Links (Horizontal di HP, Vertikal di Desktop) -->
+            <nav class="flex flex-row md:flex-col p-2 md:p-4 space-x-1 md:space-x-0 md:space-y-1.5 overflow-x-auto md:overflow-y-auto items-center md:items-stretch">
+                <a href="#" onclick="switchTab('dashboard')" id="nav-dashboard" class="flex items-center gap-2 md:gap-3 px-3 py-2 md:px-3.5 md:py-2.5 rounded-lg text-xs md:text-sm font-medium bg-blue-900/80 text-white transition-all shadow-sm whitespace-nowrap">
+                    <i class="fa-solid fa-chart-pie w-4 md:w-5 text-center text-blue-400"></i> <span class="hidden md:inline">Dashboard</span>
                 </a>
-                <a href="#" onclick="switchTab('new-ticket')" id="nav-new-ticket" class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium hover:bg-blue-900/40 text-slate-300 hover:text-white transition-all">
-                    <i class="fa-solid fa-plus-circle w-5 text-center text-emerald-400"></i> Buat Open Tiket
+                <a href="#" onclick="switchTab('new-ticket')" id="nav-new-ticket" class="flex items-center gap-2 md:gap-3 px-3 py-2 md:px-3.5 md:py-2.5 rounded-lg text-xs md:text-sm font-medium hover:bg-blue-900/40 text-slate-300 hover:text-white transition-all whitespace-nowrap">
+                    <i class="fa-solid fa-plus-circle w-4 md:w-5 text-center text-emerald-400"></i> <span class="hidden md:inline">Buat Open Tiket</span>
                 </a>
-                <a href="#" onclick="switchTab('my-tickets')" id="nav-my-tickets" class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium hover:bg-blue-900/40 text-slate-300 hover:text-white transition-all">
-                    <i class="fa-solid fa-ticket w-5 text-center text-amber-400"></i> Riwayat Tiket
+                <a href="#" onclick="switchTab('my-tickets')" id="nav-my-tickets" class="flex items-center gap-2 md:gap-3 px-3 py-2 md:px-3.5 md:py-2.5 rounded-lg text-xs md:text-sm font-medium hover:bg-blue-900/40 text-slate-300 hover:text-white transition-all whitespace-nowrap">
+                    <i class="fa-solid fa-ticket w-4 md:w-5 text-center text-amber-400"></i> <span class="hidden md:inline">Riwayat Tiket</span>
                 </a>
             </nav>
 
-            <!-- User Profile Footer -->
-            <div class="p-4 border-t border-blue-900/50 bg-blue-950/50 flex items-center justify-between">
+            <!-- User Profile Footer (Ringkas di HP, Lengkap di Desktop) -->
+            <div class="p-2 md:p-4 border-t-0 md:border-t border-blue-900/50 bg-blue-950/50 flex items-center justify-between">
                 <div class="flex items-center gap-3 overflow-hidden">
-                    <div class="w-8 h-8 rounded-full bg-blue-800 flex items-center justify-center text-white text-xs font-bold border border-blue-700">
+                    <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-blue-800 flex items-center justify-center text-white text-xs font-bold border border-blue-700 shrink-0">
                         <span id="userInitial">T</span>
                     </div>
-                    <div class="truncate">
+                    <div class="hidden md:block truncate">
                         <p id="userNameDisplay" class="text-xs font-semibold text-white truncate">Toha</p>
                         <p id="userEmailDisplay" class="text-[10px] text-blue-300 truncate">ahmad.tohawi@banksentosa.co.id</p>
                     </div>
@@ -129,80 +129,80 @@
         <main class="flex-1 flex flex-col overflow-hidden bg-slate-50">
             
             <!-- Top Navbar -->
-            <header class="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between shadow-xs z-10">
+            <header class="h-14 md:h-16 bg-white border-b border-slate-200 px-4 md:px-6 flex items-center justify-between shadow-xs z-10">
                 <div class="flex items-center gap-3">
-                    <h3 id="pageTitle" class="text-base font-bold text-slate-800">Dashboard Utama</h3>
+                    <h3 id="pageTitle" class="text-sm md:text-base font-bold text-slate-800">Dashboard Utama</h3>
                 </div>
-                <div class="flex items-center gap-4">
-                    <span id="notificationBadge" class="hidden items-center gap-1.5 text-xs bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-full border border-emerald-200 font-medium animate-pulse">
-                        <i class="fa-regular fa-paper-plane"></i> Email Notifikasi Terkirim ke GA
+                <div class="flex items-center gap-2 md:gap-4">
+                    <span id="notificationBadge" class="hidden items-center gap-1.5 text-[10px] md:text-xs bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-full border border-emerald-200 font-medium animate-pulse">
+                        <i class="fa-regular fa-paper-plane"></i> Email Notifikasi Terkirim
                     </span>
-                    <div class="text-xs text-slate-700 font-bold tracking-wide uppercase">
+                    <div class="text-[10px] md:text-xs text-slate-700 font-bold tracking-wide uppercase text-right">
                         PT. BPR Karya Prima Sentosa
                     </div>
                 </div>
             </header>
 
             <!-- Dynamic Content Container -->
-            <div class="flex-1 overflow-y-auto p-6">
+            <div class="flex-1 overflow-y-auto p-4 md:p-6">
                 
                 <!-- TAB 1: DASHBOARD -->
                 <div id="tab-dashboard" class="space-y-6">
                     <!-- Metric Cards -->
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+                        <div class="bg-white p-4 md:p-5 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
                             <div>
-                                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Tiket</p>
-                                <h4 id="statTotal" class="text-2xl font-bold text-slate-800 mt-1">0</h4>
+                                <p class="text-[10px] md:text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Tiket</p>
+                                <h4 id="statTotal" class="text-xl md:text-2xl font-bold text-slate-800 mt-1">0</h4>
                             </div>
-                            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-lg">
+                            <div class="w-10 h-10 md:w-12 md:h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-base md:text-lg">
                                 <i class="fa-solid fa-ticket"></i>
                             </div>
                         </div>
-                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
+                        <div class="bg-white p-4 md:p-5 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
                             <div>
-                                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Open / Pending</p>
-                                <h4 id="statOpen" class="text-2xl font-bold text-amber-600 mt-1">0</h4>
+                                <p class="text-[10px] md:text-xs font-semibold text-slate-400 uppercase tracking-wider">Open / Pending</p>
+                                <h4 id="statOpen" class="text-xl md:text-2xl font-bold text-amber-600 mt-1">0</h4>
                             </div>
-                            <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center text-lg">
+                            <div class="w-10 h-10 md:w-12 md:h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center text-base md:text-lg">
                                 <i class="fa-solid fa-clock"></i>
                             </div>
                         </div>
-                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
+                        <div class="bg-white p-4 md:p-5 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
                             <div>
-                                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">In Progress</p>
-                                <h4 id="statProgress" class="text-2xl font-bold text-blue-600 mt-1">0</h4>
+                                <p class="text-[10px] md:text-xs font-semibold text-slate-400 uppercase tracking-wider">In Progress</p>
+                                <h4 id="statProgress" class="text-xl md:text-2xl font-bold text-blue-600 mt-1">0</h4>
                             </div>
-                            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-lg">
+                            <div class="w-10 h-10 md:w-12 md:h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-base md:text-lg">
                                 <i class="fa-solid fa-spinner"></i>
                             </div>
                         </div>
-                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
+                        <div class="bg-white p-4 md:p-5 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
                             <div>
-                                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Resolved</p>
-                                <h4 id="statResolved" class="text-2xl font-bold text-emerald-600 mt-1">0</h4>
+                                <p class="text-[10px] md:text-xs font-semibold text-slate-400 uppercase tracking-wider">Resolved</p>
+                                <h4 id="statResolved" class="text-xl md:text-2xl font-bold text-emerald-600 mt-1">0</h4>
                             </div>
-                            <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center text-lg">
+                            <div class="w-10 h-10 md:w-12 md:h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center text-base md:text-lg">
                                 <i class="fa-solid fa-circle-check"></i>
                             </div>
                         </div>
                     </div>
 
                     <!-- Welcome Banner -->
-                    <div class="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-2xl p-6 text-white shadow-md flex items-center justify-between">
+                    <div class="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-2xl p-5 md:p-6 text-white shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                         <div>
                             <span class="bg-blue-800/80 text-blue-200 text-xs px-2.5 py-1 rounded-md font-medium border border-blue-700">Internal Helpdesk</span>
-                            <h2 class="text-xl font-bold mt-2">Selamat datang di Sent Service, <span id="welcomeName"></span>!</h2>
-                            <p class="text-sm text-blue-100 mt-1 max-w-xl">Butuh bantuan perbaikan fasilitas kantor, kendala IT, atau pengadaan barang operasional? Buat tiket baru dan tim General Affairs akan segera memprosesnya.</p>
+                            <h2 class="text-lg md:text-xl font-bold mt-2">Selamat datang di Sent Service, <span id="welcomeName"></span>!</h2>
+                            <p class="text-xs md:text-sm text-blue-100 mt-1 max-w-xl">Butuh bantuan perbaikan fasilitas kantor, kendala IT, atau pengadaan barang operasional? Buat tiket baru dan tim General Affairs akan segera memprosesnya.</p>
                         </div>
-                        <button onclick="switchTab('new-ticket')" class="hidden md:inline-flex items-center gap-2 bg-white text-blue-950 font-semibold px-4 py-2.5 rounded-lg text-sm hover:bg-blue-50 transition-all shadow-sm">
+                        <button onclick="switchTab('new-ticket')" class="inline-flex items-center gap-2 bg-white text-blue-950 font-semibold px-4 py-2.5 rounded-lg text-xs md:text-sm hover:bg-blue-50 transition-all shadow-sm shrink-0">
                             <i class="fa-solid fa-plus"></i> Buat Tiket Baru
                         </button>
                     </div>
                 </div>
 
                 <!-- TAB 2: BUAT OPEN TIKET -->
-                <div id="tab-new-ticket" class="hidden max-w-2xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-xs p-6">
+                <div id="tab-new-ticket" class="hidden max-w-2xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-xs p-4 md:p-6">
                     <div class="border-b border-slate-100 pb-4 mb-5">
                         <h3 class="text-base font-bold text-slate-800">Formulir Pengajuan Tiket Baru</h3>
                         <p class="text-xs text-slate-500 mt-0.5">Isi detail kendala atau permintaan layanan Anda dengan lengkap.</p>
@@ -289,8 +289,9 @@
                             <h3 class="text-sm font-bold text-slate-800">Daftar Tiket Terkirim</h3>
                             <div class="text-xs text-slate-400">Total: <span id="ticketCountBadge">0</span> Tiket</div>
                         </div>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left border-collapse">
+                        <!-- Bungkus dengan overflow-x-auto agar tabel bisa digeser mulus di HP -->
+                        <div class="overflow-x-auto w-full">
+                            <table class="w-full text-left border-collapse min-w-[700px]">
                                 <thead>
                                     <tr class="bg-slate-50 border-b border-slate-200 text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
                                         <th class="p-3.5">ID Tiket</th>
