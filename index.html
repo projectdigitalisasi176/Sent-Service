@@ -82,7 +82,7 @@
     <!-- ==================== APLIKASI UTAMA ==================== -->
     <div id="mainApp" class="hidden flex flex-col md:flex-row h-screen w-screen overflow-hidden">
         
-        <!-- Sidebar untuk Desktop & Tablet/HP (Bisa di-toggle atau responsif) -->
+        <!-- Sidebar untuk Desktop & Tablet/HP -->
         <aside class="w-full md:w-64 bg-blue-950 text-slate-300 flex flex-row md:flex-col border-b md:border-b-0 md:border-r border-blue-900 shadow-xl z-20 justify-between md:justify-start shrink-0">
             <!-- Brand -->
             <div class="p-3 md:p-5 border-b-0 md:border-b border-blue-900/50 flex items-center gap-3">
@@ -95,7 +95,7 @@
                 </div>
             </div>
 
-            <!-- Navigation Links (Horizontal di HP, Vertikal di Desktop) -->
+            <!-- Navigation Links -->
             <nav class="flex flex-row md:flex-col p-2 md:p-4 space-x-1 md:space-x-0 md:space-y-1.5 overflow-x-auto md:overflow-y-auto items-center md:items-stretch">
                 <a href="#" onclick="switchTab('dashboard')" id="nav-dashboard" class="flex items-center gap-2 md:gap-3 px-3 py-2 md:px-3.5 md:py-2.5 rounded-lg text-xs md:text-sm font-medium bg-blue-900/80 text-white transition-all shadow-sm whitespace-nowrap">
                     <i class="fa-solid fa-chart-pie w-4 md:w-5 text-center text-blue-400"></i> <span class="hidden md:inline">Dashboard</span>
@@ -106,9 +106,13 @@
                 <a href="#" onclick="switchTab('my-tickets')" id="nav-my-tickets" class="flex items-center gap-2 md:gap-3 px-3 py-2 md:px-3.5 md:py-2.5 rounded-lg text-xs md:text-sm font-medium hover:bg-blue-900/40 text-slate-300 hover:text-white transition-all whitespace-nowrap">
                     <i class="fa-solid fa-ticket w-4 md:w-5 text-center text-amber-400"></i> <span class="hidden md:inline">Riwayat Tiket</span>
                 </a>
+                <!-- MENU BARU: UBAH PASSWORD -->
+                <a href="#" onclick="switchTab('change-password')" id="nav-change-password" class="flex items-center gap-2 md:gap-3 px-3 py-2 md:px-3.5 md:py-2.5 rounded-lg text-xs md:text-sm font-medium hover:bg-blue-900/40 text-slate-300 hover:text-white transition-all whitespace-nowrap">
+                    <i class="fa-solid fa-key w-4 md:w-5 text-center text-yellow-400"></i> <span class="hidden md:inline">Ubah Password</span>
+                </a>
             </nav>
 
-            <!-- User Profile Footer (Ringkas di HP, Lengkap di Desktop) -->
+            <!-- User Profile Footer -->
             <div class="p-2 md:p-4 border-t-0 md:border-t border-blue-900/50 bg-blue-950/50 flex items-center justify-between">
                 <div class="flex items-center gap-3 overflow-hidden">
                     <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-blue-800 flex items-center justify-center text-white text-xs font-bold border border-blue-700 shrink-0">
@@ -289,7 +293,6 @@
                             <h3 class="text-sm font-bold text-slate-800">Daftar Tiket Terkirim</h3>
                             <div class="text-xs text-slate-400">Total: <span id="ticketCountBadge">0</span> Tiket</div>
                         </div>
-                        <!-- Bungkus dengan overflow-x-auto agar tabel bisa digeser mulus di HP -->
                         <div class="overflow-x-auto w-full">
                             <table class="w-full text-left border-collapse min-w-[700px]">
                                 <thead>
@@ -312,6 +315,35 @@
                     </div>
                 </div>
 
+                <!-- TAB 4: UBAH PASSWORD -->
+                <div id="tab-change-password" class="hidden max-w-md mx-auto bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-4">
+                    <div class="border-b border-slate-100 pb-3">
+                        <h3 class="text-base font-bold text-slate-800">Ubah Password Akun</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">Perbarui password akun kantor Anda secara berkala demi keamanan.</p>
+                    </div>
+
+                    <form id="changePasswordForm" onsubmit="submitChangePassword(event)" class="space-y-3">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Password Lama</label>
+                            <input type="password" id="oldPassword" required class="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Password Baru</label>
+                            <input type="password" id="newPassword" required class="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Konfirmasi Password Baru</label>
+                            <input type="password" id="confirmPassword" required class="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600">
+                        </div>
+                        
+                        <div id="passwordAlert" class="hidden text-xs p-2.5 rounded-lg border"></div>
+
+                        <button type="submit" class="w-full bg-blue-900 text-white font-medium py-2.5 rounded-lg text-sm hover:bg-blue-800 transition-all shadow-sm">
+                            Simpan Password Baru
+                        </button>
+                    </form>
+                </div>
+
             </div>
         </main>
     </div>
@@ -325,7 +357,7 @@
         ];
 
         let currentUser = null;
-        let tickets = []; // Data ditarik langsung dari Google Sheets secara real-time
+        let tickets = []; 
 
         // URL Web App Google Apps Script Anda
         const gasAppUrl = "https://script.google.com/macros/s/AKfycbyYp-WvuDljunjfrUzs10Fmg3kvK_fG5UxjtfPQLDpnIEI_2mms6Al7dYbl8DIBrtu2/exec";
@@ -358,11 +390,9 @@
             document.getElementById('userEmailDisplay').textContent = currentUser.email;
             document.getElementById('userInitial').textContent = currentUser.name.charAt(0).toUpperCase();
             
-            // Auto isi nama pelapor dan sapaan dashboard
             document.getElementById('welcomeName').textContent = currentUser.name;
             document.getElementById('ticketName').value = currentUser.name;
 
-            // Ambil data dari Google Sheets saat aplikasi dibuka
             fetchTicketsFromSheet();
         }
 
@@ -387,10 +417,11 @@
             document.getElementById('loginForm').reset();
         }
 
-        // Tab Switching
+        // Tab Switching (Diperbarui mencakup change-password)
         function switchTab(tabId) {
-            ['dashboard', 'new-ticket', 'my-tickets'].forEach(id => {
-                document.getElementById(`tab-${id}`).classList.add('hidden');
+            ['dashboard', 'new-ticket', 'my-tickets', 'change-password'].forEach(id => {
+                const tabEl = document.getElementById(`tab-${id}`);
+                if(tabEl) tabEl.classList.add('hidden');
                 const nav = document.getElementById(`nav-${id}`);
                 if(nav) {
                     nav.classList.remove('bg-blue-900/80', 'text-white', 'shadow-sm');
@@ -398,7 +429,9 @@
                 }
             });
 
-            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            const activeTab = document.getElementById(`tab-${tabId}`);
+            if(activeTab) activeTab.classList.remove('hidden');
+            
             const activeNav = document.getElementById(`nav-${tabId}`);
             if(activeNav) {
                 activeNav.classList.remove('text-slate-300', 'hover:bg-blue-900/40');
@@ -408,17 +441,72 @@
             const titles = {
                 'dashboard': 'Dashboard Utama',
                 'new-ticket': 'Formulir Buat Open Tiket',
-                'my-tickets': 'Riwayat Tiket Terkirim'
+                'my-tickets': 'Riwayat Tiket Terkirim',
+                'change-password': 'Ubah Password Akun'
             };
-            document.getElementById('pageTitle').textContent = titles[tabId];
+            if(titles[tabId]) document.getElementById('pageTitle').textContent = titles[tabId];
 
-            // Refresh data otomatis saat membuka dashboard atau riwayat tiket
             if(tabId === 'my-tickets' || tabId === 'dashboard') {
                 fetchTicketsFromSheet();
             }
         }
 
-        // Generate ID Tiket Berurutan (TKT-2026-001, dst)
+        // Fungsi Ubah Password via API Google Apps Script
+        function submitChangePassword(e) {
+            e.preventDefault();
+            const oldPassword = document.getElementById('oldPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const alertBox = document.getElementById('passwordAlert');
+
+            if (newPassword !== confirmPassword) {
+                alertBox.textContent = "Konfirmasi password baru tidak cocok!";
+                alertBox.className = "text-xs p-2.5 rounded-lg bg-red-50 text-red-600 border border-red-200";
+                alertBox.classList.remove('hidden');
+                return;
+            }
+
+            alertBox.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Menyimpan password...';
+            alertBox.className = "text-xs p-2.5 rounded-lg bg-blue-50 text-blue-700 border border-blue-200";
+            alertBox.classList.remove('hidden');
+
+            const payload = {
+                action: "changePassword",
+                email: currentUser.email,
+                oldPassword: oldPassword,
+                newPassword: newPassword
+            };
+
+            fetch(gasAppUrl, {
+                method: 'POST',
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    alertBox.textContent = "Password berhasil diubah! Silakan gunakan password baru pada login berikutnya.";
+                    alertBox.className = "text-xs p-2.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200";
+                    document.getElementById('changePasswordForm').reset();
+                    
+                    // Update juga array lokal jika pakai validUsers
+                    const u = validUsers.find(item => item.email === currentUser.email);
+                    if(u) u.password = newPassword;
+                } else if (data.status === "wrong_password") {
+                    alertBox.textContent = "Password lama yang Anda masukkan salah!";
+                    alertBox.className = "text-xs p-2.5 rounded-lg bg-red-50 text-red-600 border border-red-200";
+                } else {
+                    alertBox.textContent = "Gagal mengubah password. Pastikan Sheet Users sudah siap.";
+                    alertBox.className = "text-xs p-2.5 rounded-lg bg-red-50 text-red-600 border border-red-200";
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alertBox.textContent = "Terjadi kesalahan koneksi ke server.";
+                alertBox.className = "text-xs p-2.5 rounded-lg bg-red-50 text-red-600 border border-red-200";
+            });
+        }
+
+        // Generate ID Tiket Berurutan
         function generateSequentialTicketId() {
             let counter = parseInt(localStorage.getItem('sent_service_ticket_counter')) || 0;
             counter++;
@@ -509,7 +597,6 @@
                 renderTicketsTable();
             }
 
-            // Kirim request ke Google Apps Script untuk update baris di Sheets
             fetch(`${gasAppUrl}?action=updateStatus&id=${ticketId}&status=${newStatus}`)
             .then(response => response.json())
             .catch(err => console.error("Gagal sinkronisasi status ke Sheets:", err));
